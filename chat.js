@@ -57,15 +57,15 @@ window.SMARTSVAR = {
   suggestions: ['Hvilket spabad passer for oss?', 'Hva koster levering?', 'Jeg trenger service'],
   placeholder: 'Skriv spørsmålet ditt…',
   launcherText: 'Spør oss',
-  launcherSub: 'AI-assistent · skriv eller snakk',
+  launcherSub: 'AI-assistent · svarer med en gang',
   launcherMark: true,
 
   // EU:s AI-förordning: besökaren ska veta att hen pratar med en AI. Står under namnet och i foten.
   status: 'AI-assistent · svarer med en gang',
   aiNotice: 'Du chatter med en AI, som kan ta feil.',
 
-  // Röstinmatning: en stor Snakk-knapp i skrivfältet och ett tips i starten.
-  voice: true,
+  // Bara chatt: ingen röst, ingen mikrofon och ingen uppläsning.
+  voice: false,
   teaser: 'Hei! Drømmer du om eget spabad? Jeg hjelper deg å finne det som passer.',
   // Alla småtexter på norska (widget.js har svenska som standard).
   texts: {
