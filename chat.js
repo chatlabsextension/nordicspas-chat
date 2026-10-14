@@ -26,6 +26,12 @@
     host.setAttribute('data-lenis-prevent', '');
     host.setAttribute('data-lenis-prevent-wheel', '');
     host.setAttribute('data-lenis-prevent-touch', '');
+    // Webbläsarens översättning (Chrome, Safari) får inte röra chatten: den gjorde "Nordic Spas" till "Nordiske spa"
+    // och "Smartsvar" till "Smart Answers". Chatten svarar redan på besökarens språk.
+    host.setAttribute('translate', 'no');
+    host.classList.add('notranslate');
+    var inner = host.shadowRoot && host.shadowRoot.querySelector('.w');
+    if (inner) { inner.setAttribute('translate', 'no'); inner.classList.add('notranslate'); }
     ['wheel', 'touchstart', 'touchmove'].forEach(function (t) {
       host.addEventListener(t, function (e) { e.stopPropagation(); }, { passive: true });
     });
