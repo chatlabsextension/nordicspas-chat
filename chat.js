@@ -14,6 +14,24 @@
   document.head.appendChild(f);
 })();
 
+(function () {
+  // Scrollen i chatten: sajter med "smooth scroll" (till exempel Framer med Lenis) fångar mushjulet och svepen på hela sidan,
+  // så att chatten inte går att scrolla. Chattens ruta märks därför som undantag, och hjulet och svepen stannar i chatten.
+  var tries = 0;
+  (function hook() {
+    var host = document.getElementById('smartsvar-chat');
+    if (!host) { if (tries++ < 200) setTimeout(hook, 100); return; }
+    if (host.getAttribute('data-ns-scroll')) return;
+    host.setAttribute('data-ns-scroll', '1');
+    host.setAttribute('data-lenis-prevent', '');
+    host.setAttribute('data-lenis-prevent-wheel', '');
+    host.setAttribute('data-lenis-prevent-touch', '');
+    ['wheel', 'touchstart', 'touchmove'].forEach(function (t) {
+      host.addEventListener(t, function (e) { e.stopPropagation(); }, { passive: true });
+    });
+  })();
+})();
+
 window.SMARTSVAR = {
   name: 'Nordic Spas',
   voiceflow: { projectID: '6acf2802e4fdcb6aacb6b238', versionID: 'production' },
@@ -142,7 +160,9 @@ window.SMARTSVAR = {
     '.w{--base:#F7FAFC!important;--glow1:#CDEFF1!important;--glow1-0:rgba(205,239,241,0)!important;--glow2:#E2EDF8!important;--glow2-0:rgba(226,237,248,0)!important;',
     '--paper2:#EBF2F7!important;--line:#DCE6EE!important;--muted:#5E6B77!important}',
     // Lite bredare panel på datorn och en större, mjukare glöd överst, som norrsken över snö
-    '.w[data-m=desktop] .panel{width:min(440px,calc(var(--vw) - 32px))}',
+    // Fast storlek: panelen är lika bred och hög före och under samtalet, och rullisten tar ingen bredd från texten när den dyker upp
+    '.w[data-m=desktop] .panel{width:min(440px,calc(var(--vw) - 32px));min-width:min(440px,calc(var(--vw) - 32px));max-width:min(440px,calc(var(--vw) - 32px))}',
+    '.scroll{scrollbar-gutter:stable}',
     '.panel::before{height:560px;opacity:max(var(--glow,1),.6)}',
     // Lite större text
     '.tx,.op{font-size:16px}',
