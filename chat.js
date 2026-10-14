@@ -163,6 +163,8 @@ window.SMARTSVAR = {
     // Fast storlek: panelen är lika bred och hög före och under samtalet, och rullisten tar ingen bredd från texten när den dyker upp
     '.w[data-m=desktop] .panel{width:min(440px,calc(var(--vw) - 32px));min-width:min(440px,calc(var(--vw) - 32px));max-width:min(440px,calc(var(--vw) - 32px))}',
     '.scroll{scrollbar-gutter:stable}',
+    // Knappen "Start på nytt" syns alltid i headern, också innan man har skrivit något
+    '.w:not(.has) .rs{display:grid!important}',
     '.panel::before{height:560px;opacity:max(var(--glow,1),.6)}',
     // Lite större text
     '.tx,.op{font-size:16px}',
